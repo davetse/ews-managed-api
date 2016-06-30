@@ -58,7 +58,6 @@ namespace Microsoft.Exchange.WebServices.Data
         private ManagementRoles managementRoles;
         private IFileAttachmentContentHandler fileAttachmentContentHandler;
         private UnifiedMessaging unifiedMessaging;
-        private bool enableScpLookup = true;
         private bool traceEnablePrettyPrinting = true;
         private string targetServerVersion = null;
 
@@ -5020,8 +5019,7 @@ namespace Microsoft.Exchange.WebServices.Data
         {
             AutodiscoverService autodiscoverService = new AutodiscoverService(this, requestedServerVersion)
             {
-                RedirectionUrlValidationCallback = validateRedirectionUrlCallback,
-                EnableScpLookup = this.EnableScpLookup
+                RedirectionUrlValidationCallback = validateRedirectionUrlCallback
             };
 
             GetUserSettingsResponse response = autodiscoverService.GetUserSettings(
@@ -5782,16 +5780,6 @@ namespace Microsoft.Exchange.WebServices.Data
 
                 return this.unifiedMessaging;
             }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the AutodiscoverUrl method should perform SCP (Service Connection Point) record lookup when determining
-        /// the Autodiscover service URL.
-        /// </summary>
-        public bool EnableScpLookup
-        {
-            get { return this.enableScpLookup; }
-            set { this.enableScpLookup = value; }
         }
 
         /// <summary>

@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{f5b5526a-822d-44bc-81ad-7c33feb7ca69}</ProjectGuid>
+    <ProjectGuid>{F5B5526A-822D-44BC-81AD-7C33FEB7CA69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Exchange.WebServices.Data</RootNamespace>
@@ -169,7 +169,6 @@
     <Compile Include="Autodiscover\AutodiscoverDnsClient.cs" />
     <Compile Include="Autodiscover\AutodiscoverError.cs" />
     <Compile Include="Autodiscover\ComparisonHelpers.cs" />
-    <Compile Include="Autodiscover\DirectoryHelper.cs" />
     <Compile Include="Autodiscover\DocumentSharingLocation.cs" />
     <Compile Include="Autodiscover\DocumentSharingLocationCollection.cs" />
     <Compile Include="Autodiscover\DomainSettingError.cs" />

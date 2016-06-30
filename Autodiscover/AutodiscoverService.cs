@@ -143,7 +143,6 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
         private AutodiscoverRedirectionUrlValidationCallback redirectionUrlValidationCallback;
         private AutodiscoverDnsClient dnsClient;
         private IPAddress dnsServerAddress;
-        private bool enableScpLookup = true;
 
         private delegate TGetSettingsResponseCollection GetSettingsMethod<TGetSettingsResponseCollection, TSettingName>(
             List<string> smtpAddresses,
@@ -1282,17 +1281,6 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
         }
 
         /// <summary>
-        /// Defaults the get autodiscover service urls for domain.
-        /// </summary>
-        /// <param name="domainName">Name of the domain.</param>
-        /// <returns></returns>
-        private ICollection<string> DefaultGetScpUrlsForDomain(string domainName)
-        {
-            DirectoryHelper helper = new DirectoryHelper(this);
-            return helper.GetAutodiscoverScpUrlsForDomain(domainName);
-        }
-
-        /// <summary>
         /// Gets the list of autodiscover service URLs.
         /// </summary>
         /// <param name="domainName">Domain name.</param>
@@ -1301,17 +1289,6 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
         internal List<Uri> GetAutodiscoverServiceUrls(string domainName, out int scpHostCount)
         {
             List<Uri> urls = new List<Uri>();
-
-            if (this.enableScpLookup)
-            {
-                // Get SCP URLs
-                Func<string, ICollection<string>> callback = this.GetScpUrlsForDomainCallback ?? this.DefaultGetScpUrlsForDomain;
-                ICollection<string> scpUrls = callback(domainName);
-                foreach (string str in scpUrls)
-                {
-                    urls.Add(new Uri(str));
-                }
-            }
 
             scpHostCount = urls.Count;
 
@@ -1910,20 +1887,13 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
         /// <summary>
         /// Gets or sets a value indicating whether the AutodiscoverService should perform SCP (ServiceConnectionPoint) record lookup when determining
         /// the Autodiscover service URL.
+        /// 
+        /// On the UWP platform, SCP is not supported, and this property is always false.
         /// </summary>
         public bool EnableScpLookup
         {
-            get { return this.enableScpLookup; }
-            set { this.enableScpLookup = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the delegate used to resolve Autodiscover SCP urls for a specified domain.
-        /// </summary>
-        public Func<string, ICollection<string>> GetScpUrlsForDomainCallback
-        {
-            get;
-            set;
+            get { return false; }
+            set { /* Do nothing. */ }
         }
 
         #endregion
