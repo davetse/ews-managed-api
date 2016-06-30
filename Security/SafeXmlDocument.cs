@@ -91,7 +91,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Loads the XML document from the specified URL.
         /// </summary>
         /// <param name="filename">URL for the file containing the XML document to load. The URL can be either a local file or an HTTP URL (a Web address).</param>
-        public override void Load(string filename)
+        public void Load(string filename)
         {
             using (XmlReader reader = XmlReader.Create(filename, this.settings))
             {
@@ -120,7 +120,7 @@ namespace Microsoft.Exchange.WebServices.Data
             // we need to check to see if the reader is configured properly
             if (reader.Settings != null)
             {
-                if (reader.Settings.ProhibitDtd != true)
+                if (reader.Settings.DtdProcessing != DtdProcessing.Prohibit)
                 {
                     throw new XmlDtdException();
                 }

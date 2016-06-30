@@ -65,22 +65,17 @@ namespace Microsoft.Exchange.WebServices.Data
         {
             // The ProhibitDtd property is used to indicate whether XmlReader should process DTDs or not. By default, 
             // it will do so. EWS doesn't use DTD references so we want to turn this off. Also, the XmlResolver property is
-            // set to an instance of XmlUrlResolver by default. We don't want XmlTextReader to try to resolve this DTD reference 
-            // so we disable the XmlResolver as well.
+            // set to an instance of XmlUrlResolver by default.
             XmlReaderSettings settings = new XmlReaderSettings()
             {
                 ConformanceLevel = ConformanceLevel.Auto,
-                ProhibitDtd = true,
+                DtdProcessing = DtdProcessing.Prohibit,
                 IgnoreComments = true,
                 IgnoreProcessingInstructions = true,
-                IgnoreWhitespace = true,
-                XmlResolver = null
+                IgnoreWhitespace = true
             };
 
-            XmlTextReader xmlTextReader = SafeXmlFactory.CreateSafeXmlTextReader(stream);
-            xmlTextReader.Normalization = false;
-
-            return XmlReader.Create(xmlTextReader, settings);
+            return XmlReader.Create(stream, settings);
         }
 
         #endregion
