@@ -466,17 +466,6 @@ namespace Microsoft.Exchange.WebServices.Data
         }
 
         /// <summary>
-        /// Register the custom auth module to support non-ascii upn authentication if the server supports that 
-        /// </summary>
-        internal void RegisterCustomBasicAuthModule()
-        {
-            if (this.RequestedServerVersion >= ExchangeVersion.Exchange2013_SP1)
-            {
-                BasicAuthModuleForUTF8.InstantiateIfNeeded();
-            }
-        }
-
-        /// <summary>
         /// Sets the user agent to a custom value
         /// </summary>
         /// <param name="userAgent">User agent string to set on the service</param>

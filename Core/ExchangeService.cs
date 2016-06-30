@@ -5650,7 +5650,6 @@ namespace Microsoft.Exchange.WebServices.Data
         internal IEwsHttpWebRequest PrepareHttpWebRequest(string methodName)
         {
             Uri endpoint = this.Url;
-            this.RegisterCustomBasicAuthModule();
 
             endpoint = this.AdjustServiceUriFromCredentials(endpoint);
 

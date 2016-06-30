@@ -352,7 +352,6 @@
     <Compile Include="Core\ServiceObjects\Schemas\ConversationSchema.cs" />
     <Compile Include="Core\ServiceObjects\Schemas\MeetingResponseSchema.cs" />
     <Compile Include="Core\ServiceObjects\Schemas\MeetingCancellationSchema.cs" />
-    <Compile Include="Credentials\BasicAuthModuleForUTF8.cs" />
     <Compile Include="Credentials\ClientCertificateCredentials.cs" />
     <Compile Include="Credentials\OAuthCredentials.cs" />
     <Compile Include="Credentials\TokenCredentials.cs" />
