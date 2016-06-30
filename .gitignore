@@ -139,6 +139,8 @@ publish/
 !**/packages/build/
 # If using the old MSBuild-Integrated Package Restore, uncomment this:
 #!**/packages/repositories.config
+# Don't commit resolved NuGet package versions
+*.lock.json
 
 # Windows Azure Build Output
 csx/
