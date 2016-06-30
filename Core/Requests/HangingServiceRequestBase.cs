@@ -31,7 +31,6 @@ namespace Microsoft.Exchange.WebServices.Data
     using System.Net;
     using System.Text;
     using System.Threading;
-    using System.Web;
     using System.Xml;
 
     /// <summary>
@@ -217,7 +216,7 @@ namespace Microsoft.Exchange.WebServices.Data
                                 }
 
                                 // reset the stream collector.
-                                responseCopy.Close();
+                                responseCopy.Dispose();
                                 responseCopy = new MemoryStream();
                                 tracingStream.SetResponseCopy(responseCopy);
                             }
