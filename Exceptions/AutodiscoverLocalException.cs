@@ -27,12 +27,13 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an exception that is thrown when the Autodiscover service could not be contacted.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class AutodiscoverLocalException : ServiceLocalException
     {
         /// <summary>

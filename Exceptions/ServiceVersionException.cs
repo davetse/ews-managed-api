@@ -27,12 +27,13 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an error that occurs when a request cannot be handled due to a service version mismatch.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public sealed class ServiceVersionException : ServiceLocalException
     {
         /// <summary>

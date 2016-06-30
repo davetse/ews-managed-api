@@ -29,13 +29,15 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
     using System.Collections.Generic;
     using System.Text;
     using Microsoft.Exchange.WebServices.Data;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents an exception that is thrown when the Autodiscover service returns an error.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class AutodiscoverRemoteException : ServiceRemoteException
     {
+        [DataMember]
         private AutodiscoverError error;
 
         /// <summary>

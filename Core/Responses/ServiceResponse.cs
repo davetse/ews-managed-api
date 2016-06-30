@@ -30,17 +30,23 @@ namespace Microsoft.Exchange.WebServices.Data
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Net;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents the standard response to an Exchange Web Services operation.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class ServiceResponse
     {
+        [DataMember]
         private ServiceResult result;
+        [DataMember]
         private ServiceError errorCode;
+        [DataMember]
         private string errorMessage;
+        [DataMember]
         private Dictionary<string, string> errorDetails = new Dictionary<string, string>();
+        [DataMember]
         private Collection<PropertyDefinitionBase> errorProperties = new Collection<PropertyDefinitionBase>();
 
         /// <summary>

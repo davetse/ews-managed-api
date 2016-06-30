@@ -26,11 +26,12 @@
 namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents an error that occurs when the account that is being accessed is locked and requires user interaction to be unlocked.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class AccountIsLockedException : ServiceRemoteException
     {
         /// <summary>
@@ -48,6 +49,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <summary>
         /// Gets the URL of a web page where the user can navigate to unlock his or her account.
         /// </summary>
+        [DataMember]
         public Uri AccountUnlockUrl
         {
             get;

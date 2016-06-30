@@ -27,12 +27,13 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an error that occurs when a call to the DeleteAttachment web method fails.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public sealed class DeleteAttachmentException : BatchServiceResponseException<DeleteAttachmentResponse>
     {
         /// <summary>

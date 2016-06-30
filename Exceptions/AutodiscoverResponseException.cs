@@ -29,16 +29,18 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
     using System.Collections.Generic;
     using System.Text;
     using Microsoft.Exchange.WebServices.Data;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents an exception from an autodiscover error response.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class AutodiscoverResponseException : ServiceRemoteException
     {
         /// <summary>
         /// Error code when Autodiscover service operation failed remotely.
         /// </summary>
+        [DataMember]
         private AutodiscoverErrorCode errorCode;
 
         /// <summary>

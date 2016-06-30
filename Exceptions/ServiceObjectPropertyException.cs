@@ -27,17 +27,19 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an error that occurs when an operation on a property fails.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class ServiceObjectPropertyException : PropertyException
     {
         /// <summary>
         /// The definition of the property that is at the origin of the exception.
         /// </summary>
+        [DataMember]
         private PropertyDefinitionBase propertyDefinition;
 
         /// <summary>

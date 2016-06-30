@@ -27,16 +27,19 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents a strogly typed list of service responses.
     /// </summary>
     /// <typeparam name="TResponse">The type of response stored in the list.</typeparam>
-    [Serializable]
+    [DataContract]
     public sealed class ServiceResponseCollection<TResponse> : IEnumerable<TResponse> where TResponse : ServiceResponse
     {
+        [DataMember]
         private List<TResponse> responses = new List<TResponse>();
+        [DataMember]
         private ServiceResult overallResult = ServiceResult.Success;
 
         /// <summary>

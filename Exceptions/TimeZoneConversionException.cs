@@ -27,13 +27,14 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an error that occurs when a date and time cannot be converted from one time zone
     /// to another.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class TimeZoneConversionException : ServiceLocalException
     {
         /// <summary>

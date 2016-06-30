@@ -28,22 +28,25 @@ namespace Microsoft.Exchange.WebServices.Data
     using System;
     using System.Collections.Generic;
     using Microsoft.Exchange.WebServices.Data;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents an exception thrown when an error occurs as a result of calling 
     /// the UpdateInboxRules operation.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public sealed class UpdateInboxRulesException : ServiceRemoteException
     {
         /// <summary>
         /// ServiceResponse when service operation failed remotely.
         /// </summary>
+        [DataMember]
         private ServiceResponse serviceResponse;
 
         /// <summary>
         /// Rule operation error collection.
         /// </summary>
+        [DataMember]
         private RuleOperationErrorCollection errors;
 
         /// <summary>

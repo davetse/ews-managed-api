@@ -26,11 +26,12 @@
 namespace Microsoft.Exchange.WebServices.Data.Enumerations
 {
     using System;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// The consent states enumeration
     /// </summary>
-    [Serializable]
+    [DataContract]
     public enum ConsentState
     {
         /// <summary>

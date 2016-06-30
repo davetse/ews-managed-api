@@ -27,12 +27,13 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an error that occurs when a service operation fails remotely.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class ServiceRemoteException : Exception
     {
         /// <summary>

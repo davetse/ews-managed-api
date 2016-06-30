@@ -31,18 +31,24 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
     using System.Text;
     using System.Xml;
     using Microsoft.Exchange.WebServices.Data;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents an error returned by the Autodiscover service.
     /// </summary>
-    [Serializable]
+    [DataContract]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class AutodiscoverError
     {
+        [DataMember]
         private string time;
+        [DataMember]
         private string id;
+        [DataMember]
         private int errorCode;
+        [DataMember]
         private string message;
+        [DataMember]
         private string debugData;
 
         /// <summary>

@@ -26,23 +26,28 @@
 namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents a remote service exception that has a single response.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class ServiceResponseException : ServiceRemoteException
     {
         /// <summary>
         /// Error details Value keys
         /// </summary>
+        [DataMember]
         private const string ExceptionClassKey = "ExceptionClass";
+        [DataMember]
         private const string ExceptionMessageKey = "ExceptionMessage";
+        [DataMember]
         private const string StackTraceKey = "StackTrace";
 
         /// <summary>
         /// ServiceResponse when service operation failed remotely.
         /// </summary>
+        [DataMember]
         private ServiceResponse response;
 
         /// <summary>

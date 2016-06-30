@@ -27,19 +27,21 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents a remote service exception that can have multiple service responses.
     /// </summary>
     /// <typeparam name="TResponse">The type of the response.</typeparam>
-    [Serializable]
+    [DataContract]
     public abstract class BatchServiceResponseException<TResponse> : ServiceRemoteException
         where TResponse : ServiceResponse
     {
         /// <summary>
         /// The list of responses returned by the web method.
         /// </summary>
+        [DataMember]
         private ServiceResponseCollection<TResponse> responses;
 
         /// <summary>

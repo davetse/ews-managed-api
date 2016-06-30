@@ -27,11 +27,12 @@ namespace Microsoft.Exchange.WebServices.Dns
 {
     using System;
     using System.ComponentModel;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents an error that occurs when performing a DNS operation.
     /// </summary>
-    [Serializable]
+    [DataContract]
     internal class DnsException : Win32Exception
     {
         /// <summary>

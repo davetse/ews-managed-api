@@ -27,12 +27,13 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an error that occurs when a validation check fails.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public sealed class ServiceValidationException : ServiceLocalException
     {
         /// <summary>

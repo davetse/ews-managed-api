@@ -26,14 +26,17 @@
 namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
-    
+    using System.Runtime.Serialization;
+
     /// <summary>
     /// Represents a server busy exception found in a service response.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class ServerBusyException : ServiceResponseException
     {
+        [DataMember]
         private const string BackOffMillisecondsKey = @"BackOffMilliseconds";
+        [DataMember]
         private int backOffMilliseconds;
 
         /// <summary>

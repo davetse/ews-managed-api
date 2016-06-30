@@ -27,12 +27,13 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Text;
 
     /// <summary>
     /// Represents an error that occurs when the XML for a request cannot be serialized.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class ServiceXmlSerializationException : ServiceLocalException
     {
         /// <summary>

@@ -26,11 +26,12 @@
 namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Represents the base class for all property definitions.
     /// </summary>
-    [Serializable]
+    [DataContract]
     public abstract class PropertyDefinitionBase
     {
         /// <summary>
