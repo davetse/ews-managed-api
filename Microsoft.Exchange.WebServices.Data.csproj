@@ -355,11 +355,8 @@
     <Compile Include="Credentials\BasicAuthModuleForUTF8.cs" />
     <Compile Include="Credentials\ClientCertificateCredentials.cs" />
     <Compile Include="Credentials\OAuthCredentials.cs" />
-    <Compile Include="Credentials\PartnerTokenCredentials.cs" />
     <Compile Include="Credentials\TokenCredentials.cs" />
     <Compile Include="Credentials\WSSecurityBasedCredentials.cs" />
-    <Compile Include="Credentials\WSSecurityUtilityIdSignedXml.cs" />
-    <Compile Include="Credentials\X509CertificateCredentials.cs" />
     <Compile Include="Dns\DnsClient.cs" />
     <Compile Include="Dns\DnsNativeMethods.cs" />
     <Compile Include="Dns\DnsRecord.cs" />
