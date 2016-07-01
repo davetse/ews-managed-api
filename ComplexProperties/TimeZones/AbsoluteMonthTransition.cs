@@ -41,7 +41,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Initializes this transition based on the specified transition time.
         /// </summary>
         /// <param name="transitionTime">The transition time to initialize from.</param>
-        internal override void InitializeFromTransitionTime(TimeZoneInfo.TransitionTime transitionTime)
+        internal override void InitializeFromTransitionTime(Misc.TransitionTime transitionTime)
         {
             base.InitializeFromTransitionTime(transitionTime);
 

@@ -54,7 +54,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </summary>
         /// <param name="transitionTime">The transition time used to initialize this instance.</param>
         /// <param name="delta">The offset used to initialize this instance.</param>
-        internal LegacyAvailabilityTimeZoneTime(TimeZoneInfo.TransitionTime transitionTime, TimeSpan delta)
+        internal LegacyAvailabilityTimeZoneTime(Misc.TransitionTime transitionTime, TimeSpan delta)
             : this()
         {
             this.delta = delta;
@@ -84,11 +84,11 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Converts this instance to TimeZoneInfo.TransitionTime.
         /// </summary>
         /// <returns>A TimeZoneInfo.TransitionTime</returns>
-        internal TimeZoneInfo.TransitionTime ToTransitionTime()
+        internal Misc.TransitionTime ToTransitionTime()
         {
             if (this.year == 0)
             {
-                return TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                return Misc.TransitionTime.CreateFloatingDateRule(
                     new DateTime(
                         DateTime.MinValue.Year,
                         DateTime.MinValue.Month,
@@ -102,7 +102,7 @@ namespace Microsoft.Exchange.WebServices.Data
             }
             else
             {
-                return TimeZoneInfo.TransitionTime.CreateFixedDateRule(
+                return Misc.TransitionTime.CreateFixedDateRule(
                     new DateTime(this.timeOfDay.Ticks),
                     this.month,
                     this.dayOrder);
