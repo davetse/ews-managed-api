@@ -87,20 +87,20 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Initializes a new instance of the <see cref="TimeZoneDefinition"/> class.
         /// </summary>
         /// <param name="timeZoneInfo">The time zone info used to initialize this definition.</param>
-        internal TimeZoneDefinition(TimeZoneInfo timeZoneInfo)
+        internal TimeZoneDefinition(Misc.CustomTimeZoneInfo customeTimeZoneInfo)
             : this()
         {
-            this.Id = timeZoneInfo.Id;
-            this.Name = timeZoneInfo.DisplayName;
+            this.Id = customeTimeZoneInfo.Id;
+            this.Name = customeTimeZoneInfo.DisplayName;
 
             // TimeZoneInfo only supports one standard period, which bias is the time zone's base
             // offset to UTC.
             TimeZonePeriod standardPeriod = new TimeZonePeriod();
             standardPeriod.Id = TimeZonePeriod.StandardPeriodId;
             standardPeriod.Name = TimeZonePeriod.StandardPeriodName;
-            standardPeriod.Bias = -timeZoneInfo.BaseUtcOffset;
+            standardPeriod.Bias = -customeTimeZoneInfo.BaseUtcOffset;
             
-            TimeZoneInfo.AdjustmentRule[] adjustmentRules = timeZoneInfo.GetAdjustmentRules();
+            Misc.AdjustmentRule[] adjustmentRules = customeTimeZoneInfo.GetAdjustmentRules();
 
             TimeZoneTransition transitionToStandardPeriod = new TimeZoneTransition(this, standardPeriod);
 
@@ -428,11 +428,11 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </summary>
         /// <param name="service">The service.</param>
         /// <returns>A TimeZoneInfo representing the same time zone as this definition.</returns>
-        internal TimeZoneInfo ToTimeZoneInfo(ExchangeService service)
+        internal Misc.CustomTimeZoneInfo ToTimeZoneInfo(ExchangeService service)
         {
             this.Validate();
 
-            TimeZoneInfo result;
+            Misc.CustomTimeZoneInfo result;
 
             // Retrieve the base offset to UTC, standard and daylight display names from
             // the last transition group, which is the one that currently applies given that
@@ -440,7 +440,7 @@ namespace Microsoft.Exchange.WebServices.Data
             TimeZoneTransitionGroup.CustomTimeZoneCreateParams creationParams =
                 this.transitions[this.transitions.Count - 1].TargetGroup.GetCustomTimeZoneCreationParams();
 
-            List<TimeZoneInfo.AdjustmentRule> adjustmentRules = new List<TimeZoneInfo.AdjustmentRule>();
+            List<Misc.AdjustmentRule> adjustmentRules = new List<Misc.AdjustmentRule>();
 
             DateTime startDate = DateTime.MinValue;
             DateTime endDate;
@@ -463,7 +463,7 @@ namespace Microsoft.Exchange.WebServices.Data
                 // startDate may not always come before the effectiveEndDate
                 if (startDate < effectiveEndDate)
                 {
-                    TimeZoneInfo.AdjustmentRule adjustmentRule = this.transitions[i].TargetGroup.CreateAdjustmentRule(startDate, effectiveEndDate);
+                    Misc.AdjustmentRule adjustmentRule = this.transitions[i].TargetGroup.CreateAdjustmentRule(startDate, effectiveEndDate);
 
                     if (adjustmentRule != null)
                     {
@@ -487,7 +487,7 @@ namespace Microsoft.Exchange.WebServices.Data
             {
                 // If there are no adjustment rule, the time zone does not support Daylight
                 // saving time.
-                result = TimeZoneInfo.CreateCustomTimeZone(
+                result = Misc.CustomTimeZoneInfo.CreateCustomTimeZone(
                     this.Id,
                     creationParams.BaseOffsetToUtc,
                     this.Name,
@@ -495,7 +495,7 @@ namespace Microsoft.Exchange.WebServices.Data
             }
             else
             {
-                result = TimeZoneInfo.CreateCustomTimeZone(
+                result = Misc.CustomTimeZoneInfo.CreateCustomTimeZone(
                     this.Id,
                     creationParams.BaseOffsetToUtc,
                     this.Name,

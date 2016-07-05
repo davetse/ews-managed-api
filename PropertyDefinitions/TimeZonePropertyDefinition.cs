@@ -76,14 +76,14 @@ namespace Microsoft.Exchange.WebServices.Data
             PropertyBag propertyBag,
             bool isUpdateOperation)
         {
-            TimeZoneInfo value = (TimeZoneInfo)propertyBag[this];
+            Misc.CustomTimeZoneInfo value = (Misc.CustomTimeZoneInfo)propertyBag[this];
 
             if (value != null)
             {
                 // We emit time zone properties only if we have not emitted the time zone SOAP header
                 // or if this time zone is different from that of the service through which the request
                 // is being emitted.
-                if (!writer.IsTimeZoneHeaderEmitted || value != writer.Service.TimeZone)
+                if (!writer.IsTimeZoneHeaderEmitted || /*value != writer.Service.TimeZone*/ !value.Equals(writer.Service.TimeZone))
                 {
                     TimeZoneDefinition timeZoneDefinition = new TimeZoneDefinition(value);
 

@@ -591,7 +591,8 @@ namespace Microsoft.Exchange.WebServices.Data
             {
                 if (this.timeZoneDefinition == null)
                 {
-                    this.timeZoneDefinition = new TimeZoneDefinition(this.TimeZone);
+                    Misc.CustomTimeZoneInfo customTimeZoneInfo = Misc.CustomTimeZoneInfo.CreateCustomTimeZone(this.TimeZone);
+                    this.timeZoneDefinition = new TimeZoneDefinition(customTimeZoneInfo);
                 }
 
                 return this.timeZoneDefinition;

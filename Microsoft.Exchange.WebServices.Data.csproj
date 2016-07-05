@@ -159,6 +159,7 @@
     <Compile Include="Groups\ComplexProperties\UnifiedGroupsSet.cs" />
     <Compile Include="Interfaces\IPeopleQueryResults.cs" />
     <Compile Include="Misc\AdjustmentRule.cs" />
+    <Compile Include="Misc\CustomTimeZoneInfo.cs" />
     <Compile Include="Misc\TransitionTime.cs" />
     <Compile Include="Properties\AssemblyInfoMicrosoft.cs" />
     <Compile Include="Properties\AssemblyInfoOpenSource.cs" />
