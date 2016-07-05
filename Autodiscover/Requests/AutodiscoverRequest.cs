@@ -285,7 +285,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                 try
                 {
                     Uri redirectionUri = new Uri(this.Url, location);
-                    if ((redirectionUri.Scheme == Uri.UriSchemeHttp) || (redirectionUri.Scheme == Uri.UriSchemeHttps))
+                    if ((redirectionUri.Scheme == /*Uri.UriSchemeHttp*/ "http") || (redirectionUri.Scheme == /*Uri.UriSchemeHttps*/ "https"))
                     {
                         AutodiscoverResponse response = this.CreateServiceResponse();
                         response.ErrorCode = AutodiscoverErrorCode.RedirectUrl;

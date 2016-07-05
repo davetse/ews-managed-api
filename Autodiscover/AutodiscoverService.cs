@@ -363,7 +363,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
 
                         // Check if URL is SSL and that the path matches.
                         Match match = LegacyPathRegex.Match(redirectUrl.AbsolutePath);
-                        if ((redirectUrl.Scheme == Uri.UriSchemeHttps) &&
+                        if ((redirectUrl.Scheme == /*Uri.UriSchemeHttps*/ "https") &&
                             match.Success)
                         {
                             this.TraceMessage(
