@@ -87,20 +87,20 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Initializes a new instance of the <see cref="TimeZoneDefinition"/> class.
         /// </summary>
         /// <param name="timeZoneInfo">The time zone info used to initialize this definition.</param>
-        internal TimeZoneDefinition(Misc.CustomTimeZoneInfo customeTimeZoneInfo)
+        internal TimeZoneDefinition(Misc.CustomTimeZoneInfo customTimeZoneInfo)
             : this()
         {
-            this.Id = customeTimeZoneInfo.Id;
-            this.Name = customeTimeZoneInfo.DisplayName;
+            this.Id = customTimeZoneInfo.Id;
+            this.Name = customTimeZoneInfo.DisplayName;
 
             // TimeZoneInfo only supports one standard period, which bias is the time zone's base
             // offset to UTC.
             TimeZonePeriod standardPeriod = new TimeZonePeriod();
             standardPeriod.Id = TimeZonePeriod.StandardPeriodId;
             standardPeriod.Name = TimeZonePeriod.StandardPeriodName;
-            standardPeriod.Bias = -customeTimeZoneInfo.BaseUtcOffset;
+            standardPeriod.Bias = -customTimeZoneInfo.BaseUtcOffset;
             
-            Misc.AdjustmentRule[] adjustmentRules = customeTimeZoneInfo.GetAdjustmentRules();
+            Misc.AdjustmentRule[] adjustmentRules = customTimeZoneInfo.GetAdjustmentRules();
 
             TimeZoneTransition transitionToStandardPeriod = new TimeZoneTransition(this, standardPeriod);
 
