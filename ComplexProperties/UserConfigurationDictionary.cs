@@ -754,21 +754,19 @@ namespace Microsoft.Exchange.WebServices.Data
         {
             // This logic is based on Microsoft.Exchange.Data.Storage.ConfigurationDictionary.CheckElementSupportedType().
             bool isValidType = false;
-
-            switch (Type.GetTypeCode(type))
+            if (
+                type == typeof(bool) ||
+                type == typeof(byte) ||
+                type == typeof(DateTime) ||
+                type == typeof(Int32) ||
+                type == typeof(Int64) ||
+                type == typeof(string) ||
+                type == typeof(UInt32) ||
+                type == typeof(UInt64)
+            )
             {
-                case TypeCode.Boolean:
-                case TypeCode.Byte:
-                case TypeCode.DateTime:
-                case TypeCode.Int32:
-                case TypeCode.Int64:
-                case TypeCode.String:
-                case TypeCode.UInt32:
-                case TypeCode.UInt64:
-                    isValidType = true;
-                    break;
+                isValidType = true;
             }
-
             if (! isValidType)
             {
                 throw new ServiceLocalException(string.Format(Strings.ObjectTypeNotSupported, type));
