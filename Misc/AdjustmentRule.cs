@@ -29,7 +29,7 @@ using System.Text;
 
 namespace Microsoft.Exchange.WebServices.Data.Misc
 {
-    class AdjustmentRule
+    public class AdjustmentRule
     {
         public DateTime DateEnd { get; private set; }
         public DateTime DateStart { get; private set; }

@@ -29,7 +29,7 @@ using System.Text;
 
 namespace Microsoft.Exchange.WebServices.Data.Misc
 {
-    class TransitionTime
+    public class TransitionTime
     {
         public int Day { get; private set; }
         public DayOfWeek DayOfWeek { get; private set; }
