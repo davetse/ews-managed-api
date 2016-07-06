@@ -37,6 +37,7 @@ namespace Microsoft.Exchange.WebServices.Data.Misc
         public string DisplayName { get; private set; }
         public string StandardName { get; private set; }
         public string DaylightName { get; private set; }
+        public bool SupportsDaylightSavingTime { get; private set; }
         public AdjustmentRule[] GetAdjustmentRules()
         {
             return adjustmentRules;
@@ -63,6 +64,7 @@ namespace Microsoft.Exchange.WebServices.Data.Misc
             customTimeZoneInfo.BaseUtcOffset = baseUtcOffset;
             customTimeZoneInfo.DisplayName = displayName;
             customTimeZoneInfo.StandardName = standardDisplayName;
+            customTimeZoneInfo.SupportsDaylightSavingTime = false;
             return customTimeZoneInfo;
         }
 
@@ -81,6 +83,7 @@ namespace Microsoft.Exchange.WebServices.Data.Misc
             customTimeZoneInfo.DisplayName = displayName;
             customTimeZoneInfo.StandardName = standardDisplayName;
             customTimeZoneInfo.DaylightName = daylightDisplayName;
+            customTimeZoneInfo.SupportsDaylightSavingTime = adjustmentRules.Length > 0 ? true : false;
             customTimeZoneInfo.adjustmentRules = adjustmentRules;
             return customTimeZoneInfo;
         }
@@ -95,6 +98,7 @@ namespace Microsoft.Exchange.WebServices.Data.Misc
             customTimeZoneInfo.DisplayName = timeZoneInfo.DisplayName;
             customTimeZoneInfo.StandardName = timeZoneInfo.StandardName;
             customTimeZoneInfo.DaylightName = timeZoneInfo.DaylightName;
+            customTimeZoneInfo.SupportsDaylightSavingTime = timeZoneInfo.SupportsDaylightSavingTime;
             // NOTE: Time Zone Info doesn't support adjustment rules
             // customTimeZoneInfo.adjustmentRules = timeZoneInfo.getAdjustRules();
             return customTimeZoneInfo;
