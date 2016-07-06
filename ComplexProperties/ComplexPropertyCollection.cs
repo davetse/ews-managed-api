@@ -29,6 +29,7 @@ namespace Microsoft.Exchange.WebServices.Data
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Text;
+    using System.Reflection;
 
     /// <summary>
     /// Represents a collection of properties that can be sent to and retrieved from EWS.
@@ -164,7 +165,7 @@ namespace Microsoft.Exchange.WebServices.Data
                         TComplexProperty complexProperty = this.CreateComplexProperty(reader.LocalName);
                         TComplexProperty actualComplexProperty = this[index++];
 
-                        if (complexProperty == null || !complexProperty.GetType().IsInstanceOfType(actualComplexProperty))
+                        if (complexProperty == null || !IntrospectionExtensions.GetTypeInfo(complexProperty.GetType()).IsAssignableFrom(IntrospectionExtensions.GetTypeInfo(actualComplexProperty.GetType())))
                         {
                             throw new ServiceLocalException(Strings.PropertyTypeIncompatibleWhenUpdatingCollection);
                         }
