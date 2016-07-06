@@ -101,30 +101,30 @@ namespace Microsoft.Exchange.WebServices.Data
             Exception e = new Exception("Legacy timezone from TimeZoneInfo not supported");
         }
 
-        internal TimeZoneInfo ToTimeZoneInfo()
+        internal Misc.CustomTimeZoneInfo ToCustomTimeZoneInfo()
         {
             if (this.daylightTime.HasTransitionTime &&
                 this.standardTime.HasTransitionTime)
             {
-                TimeZoneInfo.AdjustmentRule adjustmentRule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
+                Misc.AdjustmentRule adjustmentRule = Misc.AdjustmentRule.CreateAdjustmentRule(
                     DateTime.MinValue.Date,
                     DateTime.MaxValue.Date,
                     -this.daylightTime.Delta,
                     this.daylightTime.ToTransitionTime(),
                     this.standardTime.ToTransitionTime());
 
-                return TimeZoneInfo.CreateCustomTimeZone(
+                return Misc.CustomTimeZoneInfo.CreateCustomTimeZone(
                     Guid.NewGuid().ToString(),
                     -this.bias,
                     "Custom time zone",
                     "Standard time",
                     "Daylight time",
-                    new TimeZoneInfo.AdjustmentRule[] { adjustmentRule });
+                    new Misc.AdjustmentRule[] { adjustmentRule });
             }
             else
             {
                 // Create no DST time zone
-                return TimeZoneInfo.CreateCustomTimeZone(
+                return Misc.CustomTimeZoneInfo.CreateCustomTimeZone(
                     Guid.NewGuid().ToString(),
                     -this.bias,
                     "Custom time zone",

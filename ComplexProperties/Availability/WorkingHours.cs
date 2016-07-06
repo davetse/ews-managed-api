@@ -35,7 +35,7 @@ namespace Microsoft.Exchange.WebServices.Data
     /// </summary>
     public sealed class WorkingHours : ComplexProperty
     {
-        private TimeZoneInfo timeZone;
+        private Misc.CustomTimeZoneInfo customTimeZone;
         private Collection<DayOfTheWeek> daysOfTheWeek = new Collection<DayOfTheWeek>();
         private TimeSpan startTime;
         private TimeSpan endTime;
@@ -61,7 +61,7 @@ namespace Microsoft.Exchange.WebServices.Data
                     LegacyAvailabilityTimeZone legacyTimeZone = new LegacyAvailabilityTimeZone();
                     legacyTimeZone.LoadFromXml(reader, reader.LocalName);
 
-                    this.timeZone = legacyTimeZone.ToTimeZoneInfo();
+                    this.customTimeZone = legacyTimeZone.ToCustomTimeZoneInfo();
                     
                     return true;
                 case XmlElementNames.WorkingPeriodArray:
@@ -112,9 +112,9 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <summary>
         /// Gets the time zone to which the working hours apply.
         /// </summary>
-        public TimeZoneInfo TimeZone
+        public Misc.CustomTimeZoneInfo TimeZone
         {
-            get { return this.timeZone; }
+            get { return this.customTimeZone; }
         }
 
         /// <summary>

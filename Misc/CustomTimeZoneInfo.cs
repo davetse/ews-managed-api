@@ -29,7 +29,7 @@ using System.Text;
 
 namespace Microsoft.Exchange.WebServices.Data.Misc
 {
-    class CustomTimeZoneInfo
+    public class CustomTimeZoneInfo
     {
         private AdjustmentRule[] adjustmentRules;
         public string Id { get; private set; }
