@@ -1404,7 +1404,7 @@ namespace Microsoft.Exchange.WebServices.Data
                                 "EwsUtilities.GetEnumVersion",
                                 "Enum member " + enumName + " not found in " + enumType);
 
-            object[] attrs = memberInfo[0].GetCustomAttributes(typeof(RequiredServerVersionAttribute), false);
+            object[] attrs = memberInfo[0].GetCustomAttributes(typeof(RequiredServerVersionAttribute), false).ToArray();
             if (attrs != null && attrs.Length > 0)
             {
                 return ((RequiredServerVersionAttribute)attrs[0]).Version;
@@ -1446,8 +1446,7 @@ namespace Microsoft.Exchange.WebServices.Data
                                 (memberInfo != null) && (memberInfo.Length > 0),
                                 "EwsUtilities.GetEnumSchemaName",
                                 "Enum member " + enumName + " not found in " + enumType);
-
-            object[] attrs = memberInfo[0].GetCustomAttributes(typeof(EwsEnumAttribute), false);
+            object[] attrs = memberInfo[0].GetCustomAttributes(typeof(EwsEnumAttribute), false).ToArray();
             if (attrs != null && attrs.Length > 0)
             {
                 return ((EwsEnumAttribute)attrs[0]).SchemaName;
