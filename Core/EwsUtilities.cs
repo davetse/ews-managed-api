@@ -657,7 +657,7 @@ namespace Microsoft.Exchange.WebServices.Data
             where T : struct
         {
             EwsUtilities.Assert(
-                typeof(T).IsEnum,
+                typeof(T).GetTypeInfo().IsEnum,
                 "EwsUtilities.ParseEnumValueList",
                 "T is not an enum type.");
 
@@ -702,7 +702,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>Value of type T.</returns>
         internal static T Parse<T>(string value)
         {
-            if (typeof(T).IsEnum)
+            if (typeof(T).GetTypeInfo().IsEnum)
             {
                 Dictionary<string, Enum> stringToEnumDict;
                 Enum enumValue;
@@ -1071,14 +1071,20 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>Printable name.</returns>
         public static string GetPrintableTypeName(Type type)
         {
-            if (type.IsGenericType)
+            if (type.GetTypeInfo().IsGenericType)
             {
                 // Convert generic type to printable form (e.g. List<Item>)
                 string genericPrefix = type.Name.Substring(0, type.Name.IndexOf('`'));
                 StringBuilder nameBuilder = new StringBuilder(genericPrefix);
 
                 // Note: building array of generic parameters is done recursively. Each parameter could be any type.
-                string[] genericArgs = type.GetGenericArguments().ToList<Type>().ConvertAll<string>(t => GetPrintableTypeName(t)).ToArray<string>();
+                List<Type> typeList = type.GetGenericArguments().ToList<Type>();
+                List<string> typeNameList = new List<string>();
+                foreach (Type t in typeList)
+                {
+                    typeNameList.Add(GetPrintableTypeName(t));
+                }
+                string[] genericArgs = typeNameList.ToArray<string>();
 
                 nameBuilder.Append("<");
                 nameBuilder.Append(string.Join(",", genericArgs));
