@@ -404,7 +404,7 @@ namespace Microsoft.Exchange.WebServices.Data
         {
             writer.WriteStartElement("Trace");
             writer.WriteAttributeString("Tag", traceTag);
-            writer.WriteAttributeString("Tid", Thread.CurrentThread.ManagedThreadId.ToString());
+            writer.WriteAttributeString("Tid", Environment.CurrentManagedThreadId.ToString());
             writer.WriteAttributeString("Time", DateTime.UtcNow.ToString("u", DateTimeFormatInfo.InvariantInfo));
 
             if (includeVersion)
