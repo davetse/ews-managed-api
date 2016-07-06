@@ -63,8 +63,7 @@ namespace Microsoft.Exchange.WebServices.Data
             {
                 try
                 {
-                    FileVersionInfo fileInfo = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
-                    return fileInfo.FileVersion;
+                    return typeof(EwsUtilities).GetTypeInfo().Assembly.GetName().Version.ToString();
                 }
                 catch
                 {
