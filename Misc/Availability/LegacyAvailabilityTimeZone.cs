@@ -53,6 +53,7 @@ namespace Microsoft.Exchange.WebServices.Data
         internal LegacyAvailabilityTimeZone(TimeZoneInfo timeZoneInfo)
             : this()
         {
+            /*
             // Availability uses the opposite sign for the bias, e.g. if TimeZoneInfo.BaseUtcOffset = 480 than
             // SerializedTimeZone.Bias must be -480.
             this.bias = -timeZoneInfo.BaseUtcOffset;
@@ -96,6 +97,8 @@ namespace Microsoft.Exchange.WebServices.Data
                 // Again, TimeZoneInfo and SerializableTime use opposite signs for bias.
                 this.daylightTime = new LegacyAvailabilityTimeZoneTime(currentRule.DaylightTransitionStart, -currentRule.DaylightDelta);
             }
+            */
+            Exception e = new Exception("Legacy timezone from TimeZoneInfo not supported");
         }
 
         internal TimeZoneInfo ToTimeZoneInfo()
