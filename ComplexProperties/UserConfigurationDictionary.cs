@@ -229,46 +229,53 @@ namespace Microsoft.Exchange.WebServices.Data
         private static void GetTypeCode(ExchangeServiceBase service, object dictionaryObject, ref UserConfigurationDictionaryObjectType dictionaryObjectType, ref string valueAsString)
         {
             // Handle all other types by TypeCode
-            switch (Type.GetTypeCode(dictionaryObject.GetType()))
+            Type type = dictionaryObject.GetType();
+            if (type == typeof(bool))
             {
-                case TypeCode.Boolean:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.Boolean;
-                    valueAsString = EwsUtilities.BoolToXSBool((bool)dictionaryObject);
-                    break;
-                case TypeCode.Byte:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.Byte;
-                    valueAsString = ((byte)dictionaryObject).ToString();
-                    break;
-                case TypeCode.DateTime:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.DateTime;
-                    valueAsString = service.ConvertDateTimeToUniversalDateTimeString((DateTime)dictionaryObject);
-                    break;
-                case TypeCode.Int32:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.Integer32;
-                    valueAsString = ((int)dictionaryObject).ToString();
-                    break;
-                case TypeCode.Int64:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.Integer64;
-                    valueAsString = ((long)dictionaryObject).ToString();
-                    break;
-                case TypeCode.String:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.String;
-                    valueAsString = (string)dictionaryObject;
-                    break;
-                case TypeCode.UInt32:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.UnsignedInteger32;
-                    valueAsString = ((uint)dictionaryObject).ToString();
-                    break;
-                case TypeCode.UInt64:
-                    dictionaryObjectType = UserConfigurationDictionaryObjectType.UnsignedInteger64;
-                    valueAsString = ((ulong)dictionaryObject).ToString();
-                    break;
-                default:
-                    EwsUtilities.Assert(
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.Boolean;
+                valueAsString = EwsUtilities.BoolToXSBool((bool)dictionaryObject);
+            }
+            else if (type == typeof(byte))
+            {
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.Byte;
+                valueAsString = ((byte)dictionaryObject).ToString();
+            }
+            else if (type == typeof(DateTime))
+            {
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.DateTime;
+                valueAsString = service.ConvertDateTimeToUniversalDateTimeString((DateTime)dictionaryObject);
+            }
+            else if (type == typeof(Int32))
+            {
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.Integer32;
+                valueAsString = ((int)dictionaryObject).ToString();
+            }
+            else if (type == typeof(Int64))
+            {
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.Integer64;
+                valueAsString = ((long)dictionaryObject).ToString();
+            }
+            else if (type == typeof(string))
+            {
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.String;
+                valueAsString = (string)dictionaryObject;
+            }
+            else if (type == typeof(UInt32))
+            {
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.UnsignedInteger32;
+                valueAsString = ((uint)dictionaryObject).ToString();
+            }
+            else if (type == typeof(UInt64))
+            {
+                dictionaryObjectType = UserConfigurationDictionaryObjectType.UnsignedInteger64;
+                valueAsString = ((ulong)dictionaryObject).ToString();
+            }
+            else
+            {
+                EwsUtilities.Assert(
                         false,
                         "UserConfigurationDictionary.WriteObjectValueToXml",
                         "Unsupported type: " + dictionaryObject.GetType().ToString());
-                    break;
             }
         }
 
