@@ -40,7 +40,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Uses Console.Out as output.
         /// </summary>
         internal EwsTraceListener()
-            : this(Console.Out)
+            : this(null)
         {
         }
 
@@ -60,7 +60,11 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <param name="traceMessage">The trace message.</param>
         public void Trace(string traceType, string traceMessage)
         {
-            this.writer.Write(traceMessage);
+            System.Diagnostics.Debug.WriteLine(traceMessage);
+            if (this.writer != null)
+            {
+                this.writer.Write(traceMessage);
+            }
         }
     }
 }
