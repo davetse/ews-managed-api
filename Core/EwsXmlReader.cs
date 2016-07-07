@@ -354,7 +354,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>Value</returns>
         public string ReadValue()
         {
-            return this.xmlReader.ReadString();
+            return this.xmlReader.ReadElementContentAsString();
         }
 
         /// <summary>
@@ -417,10 +417,12 @@ namespace Microsoft.Exchange.WebServices.Data
                     }
                 }
                 while (bytesRead > 0);
-               
+
                 // Can use MemoryStream.GetBuffer() if the buffer's capacity and the number of bytes read
                 // are identical. Otherwise need to convert to byte array that's the size of the number of bytes read.
-                return (memoryStream.Length == memoryStream.Capacity) ? memoryStream.GetBuffer() : memoryStream.ToArray();
+                ArraySegment<byte> memoryStreamBuffer;
+                memoryStream.TryGetBuffer(out memoryStreamBuffer);
+                return (memoryStream.Length == memoryStream.Capacity) ? memoryStreamBuffer.Array : memoryStream.ToArray();
             }
         }
 
