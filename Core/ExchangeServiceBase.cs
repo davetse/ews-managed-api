@@ -131,7 +131,7 @@ namespace Microsoft.Exchange.WebServices.Data
             bool allowAutoRedirect)
         {
             // Verify that the protocol is something that we can handle
-            if ((url.Scheme != Uri.UriSchemeHttp) && (url.Scheme != Uri.UriSchemeHttps))
+            if ((url.Scheme != "http") && (url.Scheme != "https"))
             {
                 throw new ServiceLocalException(string.Format(Strings.UnsupportedWebProtocol, url.Scheme));
             }
