@@ -448,7 +448,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <param name="headers">The HTTP headers.</param>
         private static void FormatHttpHeaders(StringBuilder sb, WebHeaderCollection headers)
         {
-            foreach (string key in headers.Keys)
+            foreach (string key in headers.AllKeys)
             {
                 sb.Append(
                     string.Format(
@@ -518,7 +518,7 @@ namespace Microsoft.Exchange.WebServices.Data
         private static string FormatHttpHeaders(WebHeaderCollection headers)
         {
             StringBuilder sb = new StringBuilder();
-            foreach (string key in headers.Keys)
+            foreach (string key in headers.AllKeys)
             {
                 sb.Append(
                     string.Format(
