@@ -424,9 +424,9 @@ namespace Microsoft.Exchange.WebServices.Data
             StringBuilder sb = new StringBuilder();
             using (StringWriter writer = new StringWriter(sb))
             {
-                using (XmlTextWriter xmlWriter = new XmlTextWriter(writer))
+                using (XmlWriter xmlWriter = XmlWriter.Create(writer))
                 {
-                    xmlWriter.Formatting = Formatting.Indented;
+                    xmlWriter.Settings.Indent = true;
 
                     EwsUtilities.WriteTraceStartElement(xmlWriter, entryKind, false);
 
@@ -556,9 +556,9 @@ namespace Microsoft.Exchange.WebServices.Data
                 {
                     using (StringWriter writer = new StringWriter(sb))
                     {
-                        using (XmlTextWriter xmlWriter = new XmlTextWriter(writer))
+                        using (XmlWriter xmlWriter = XmlWriter.Create(writer))
                         {
-                            xmlWriter.Formatting = Formatting.Indented;
+                            xmlWriter.Settings.Indent = true;
 
                             EwsUtilities.WriteTraceStartElement(xmlWriter, entryKind, true);
 
