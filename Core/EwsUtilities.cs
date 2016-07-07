@@ -500,10 +500,9 @@ namespace Microsoft.Exchange.WebServices.Data
             StringBuilder sb = new StringBuilder();
             sb.Append(
                 string.Format(
-                    "{0} {1} HTTP/{2}\n",
+                    "{0} {1}\n",
                     request.Method.ToUpperInvariant(),
-                    request.RequestUri.AbsolutePath,
-                    request.ProtocolVersion));
+                    request.RequestUri.AbsolutePath));
 
             sb.Append(EwsUtilities.FormatHttpHeaders(request.Headers));
             sb.Append("\n");
