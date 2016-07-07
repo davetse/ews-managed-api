@@ -155,7 +155,7 @@ namespace Microsoft.Exchange.WebServices.Data
             if (this.TryGetProperty(propertyDefinition, out extendedProperty))
             {
                 // Verify that the type parameter and property definition's type are compatible.
-                if (!IntrospectionExtensions.GetTypeInfo(typeof(T)).IsAssignableFrom(IntrospectionExtensions.GetTypeInfo(propertyDefinition.Type)));
+                if (!IntrospectionExtensions.GetTypeInfo(typeof(T)).IsAssignableFrom(IntrospectionExtensions.GetTypeInfo(propertyDefinition.Type)))
                 {
                     string errorMessage = string.Format(
                         Strings.PropertyDefinitionTypeMismatch,
