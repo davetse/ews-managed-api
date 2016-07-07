@@ -5660,7 +5660,7 @@ namespace Microsoft.Exchange.WebServices.Data
 
             if (!String.IsNullOrEmpty(this.TargetServerVersion))
             {
-                request.Headers.Set(ExchangeService.TargetServerVersionHeaderName, this.TargetServerVersion);
+                request.Headers[ExchangeService.TargetServerVersionHeaderName] = this.TargetServerVersion;
             }
 
             return request;

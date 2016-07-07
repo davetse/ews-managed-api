@@ -150,15 +150,15 @@ namespace Microsoft.Exchange.WebServices.Data
 
             if (acceptGzipEncoding)
             {
-                request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
+                request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip,deflate";
             }
 
             if (!string.IsNullOrEmpty(this.clientRequestId))
             {
-                request.Headers.Add("client-request-id", this.clientRequestId);
+                request.Headers["client-request-id"] = this.clientRequestId;
                 if (this.returnClientRequestId)
                 {
-                    request.Headers.Add("return-client-request-id", "true");
+                    request.Headers["return-client-request-id"] = "true";
                 }
             }
 
@@ -169,7 +169,7 @@ namespace Microsoft.Exchange.WebServices.Data
 
             if (this.HttpHeaders.Count > 0)
             {
-                this.HttpHeaders.ForEach((kv) => request.Headers.Add(kv.Key, kv.Value));
+                this.HttpHeaders.ForEach((kv) => request.Headers[kv.Key] = kv.Value);
             }
 
             request.UseDefaultCredentials = this.UseDefaultCredentials;
