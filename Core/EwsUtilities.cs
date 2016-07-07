@@ -578,7 +578,11 @@ namespace Microsoft.Exchange.WebServices.Data
                 // not well-formed XML or isn't XML at all. Fallback and treat it as plain text.
                 sb.Length = 0;
                 memoryStream.Position = 0;
-                sb.Append(Encoding.UTF8.GetString(memoryStream.GetBuffer(), 0, (int)memoryStream.Length));
+                ArraySegment<byte> buffer;
+                if (memoryStream.TryGetBuffer(out buffer))
+                {
+                    sb.Append(Encoding.UTF8.GetString(buffer.ToArray<byte>(), 0, (int)memoryStream.Length));
+                }
             }
 
             // Restore Position in the stream.
