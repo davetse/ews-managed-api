@@ -818,7 +818,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </returns>
         internal static bool IsLocalTimeZone(TimeZoneInfo timeZone)
         {
-            return (TimeZoneInfo.Local == timeZone) || (TimeZoneInfo.Local.Id == timeZone.Id && TimeZoneInfo.Local.HasSameRules(timeZone));
+            return (TimeZoneInfo.Local == timeZone) || (TimeZoneInfo.Local.Id == timeZone.Id /*&& TimeZoneInfo.Local.HasSameRules(timeZone)*/);
         }
 
         /// <summary>
