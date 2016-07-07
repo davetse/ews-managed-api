@@ -1231,6 +1231,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                         url = new Uri(string.Format(AutodiscoverSoapWsSecurityHttpsUrl, host));
                     }
                 }
+                /* Unsupported credential type
                 else if (this.Credentials is PartnerTokenCredentials)
                 {
                     if ((endpoints & AutodiscoverEndpoints.WSSecuritySymmetricKey) != AutodiscoverEndpoints.WSSecuritySymmetricKey)
@@ -1246,6 +1247,8 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                         url = new Uri(string.Format(AutodiscoverSoapWsSecuritySymmetricKeyHttpsUrl, host));
                     }
                 }
+                */
+                /* Unsupported credential type
                 else if (this.Credentials is X509CertificateCredentials)
                 {
                     if ((endpoints & AutodiscoverEndpoints.WSSecurityX509Cert) != AutodiscoverEndpoints.WSSecurityX509Cert)
@@ -1261,6 +1264,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                         url = new Uri(string.Format(AutodiscoverSoapWsSecurityX509CertHttpsUrl, host));
                     }
                 }
+                */
                 else if (this.Credentials is OAuthCredentials)
                 {
                     // If the credential is OAuthCredentials, no matter whether we have
@@ -1724,6 +1728,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
         /// <param name="partnerAccessCredentials">The partner access credentials.</param>
         /// <param name="targetTenantAutodiscoverUrl">The autodiscover url for the given tenant.</param>
         /// <returns>True if the partner access information was retrieved, false otherwise.</returns>
+        /*
         public bool TryGetPartnerAccess(
             string targetTenantDomain,
             out ExchangeCredentials partnerAccessCredentials,
@@ -1755,7 +1760,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                 smtpAddress = "SystemMailbox{e0dc1c29-89c3-4034-b678-e6c29d823ed9}@" + targetTenantDomain;
             }
 
-            GetUserSettingsRequest request = new GetUserSettingsRequest(this, this.Url, true /* expectPartnerToken */);
+            GetUserSettingsRequest request = new GetUserSettingsRequest(this, this.Url, true);
             request.SmtpAddresses = new List<string>(new[] { smtpAddress });
             request.Settings = new List<UserSettingName>(new[] { UserSettingName.ExternalEwsUrl });
 
@@ -1809,6 +1814,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
 
             return true;
         }
+        */
         #endregion
 
         #region Properties
