@@ -876,7 +876,7 @@ namespace Microsoft.Exchange.WebServices.Data
                     {
                         RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
                         ExchangeServiceBase.binarySecret = new byte[256 / 8];
-                        randomNumberGenerator.GetNonZeroBytes(binarySecret);
+                        randomNumberGenerator.GetBytes(binarySecret);
                     }
 
                     return ExchangeServiceBase.binarySecret;
