@@ -40,8 +40,8 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </summary>
         private XmlReaderSettings settings = new XmlReaderSettings()
         {
-            ProhibitDtd = true,
-            XmlResolver = null
+            DtdProcessing = DtdProcessing.Prohibit,
+            // XmlResolver = null
         };
         #endregion
 
