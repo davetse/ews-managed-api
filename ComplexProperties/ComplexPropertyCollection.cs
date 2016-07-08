@@ -165,7 +165,7 @@ namespace Microsoft.Exchange.WebServices.Data
                         TComplexProperty complexProperty = this.CreateComplexProperty(reader.LocalName);
                         TComplexProperty actualComplexProperty = this[index++];
 
-                        if (complexProperty == null || !IntrospectionExtensions.GetTypeInfo(complexProperty.GetType()).IsAssignableFrom(IntrospectionExtensions.GetTypeInfo(actualComplexProperty.GetType())))
+                        if (complexProperty == null || !complexProperty.GetType().IsAssignableFrom(actualComplexProperty.GetType()))
                         {
                             throw new ServiceLocalException(Strings.PropertyTypeIncompatibleWhenUpdatingCollection);
                         }

@@ -87,7 +87,7 @@ namespace Microsoft.Exchange.WebServices.Data
                 // All value types should implement IConvertible. There are a couple of special cases 
                 // that need to be handled directly. Otherwise use IConvertible.ToString()
                 IConvertible convertible = value as IConvertible;
-                if (IntrospectionExtensions.GetTypeInfo(value.GetType()).IsEnum)
+                if (value.GetType().GetTypeInfo().IsEnum)
                 {
                     strValue = EwsUtilities.SerializeEnum((Enum)value);
                 }
