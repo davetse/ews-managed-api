@@ -27,13 +27,14 @@ namespace Microsoft.Exchange.WebServices.Data
 {
     using System;
     using System.Collections.ObjectModel;
+    using Microsoft.Exchange.WebServices.Data.Misc;
 
     /// <summary>
     /// Represents the response to a GetServerTimeZones request.
     /// </summary>
     internal class GetServerTimeZonesResponse : ServiceResponse
     {
-        private Collection<TimeZoneInfo> timeZones = new Collection<TimeZoneInfo>();
+        private Collection<CustomTimeZoneInfo> timeZones = new Collection<CustomTimeZoneInfo>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GetServerTimeZonesResponse"/> class.
@@ -75,7 +76,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Gets the time zones returned by the associated GetServerTimeZones request.
         /// </summary>
         /// <value>The time zones.</value>
-        public Collection<TimeZoneInfo> TimeZones
+        public Collection<CustomTimeZoneInfo> TimeZones
         {
             get { return this.timeZones; }
         }
