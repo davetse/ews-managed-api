@@ -28,6 +28,7 @@ namespace Microsoft.Exchange.WebServices.Data
     using System;
     using System.Collections.Generic;
     using System.Xml;
+    using System.Reflection;
 
     /// <summary>
     /// Represents a property bag keyed on PropertyDefinition objects.
