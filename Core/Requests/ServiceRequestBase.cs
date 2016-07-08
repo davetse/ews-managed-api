@@ -222,8 +222,8 @@ namespace Microsoft.Exchange.WebServices.Data
         {
             if (!string.IsNullOrEmpty(this.AnchorMailbox))
             {
-                webHeaderCollection.Set(AnchorMailboxHeaderName, this.AnchorMailbox);
-                webHeaderCollection.Set(ExplicitLogonUserHeaderName, this.AnchorMailbox);
+                webHeaderCollection[AnchorMailboxHeaderName] = this.AnchorMailbox;
+                webHeaderCollection[ExplicitLogonUserHeaderName] = this.AnchorMailbox;
             }
         }
 
@@ -625,9 +625,7 @@ namespace Microsoft.Exchange.WebServices.Data
                     }
                     else
                     {
-                        request.Headers.Add(
-                            ClientStatisticsRequestHeader,
-                            clientStatisticsToAdd);
+                        request.Headers[ClientStatisticsRequestHeader] = clientStatisticsToAdd;
                     }
                 }
             }
@@ -651,7 +649,7 @@ namespace Microsoft.Exchange.WebServices.Data
                     {
                         foreach (string requestIdHeader in ServiceRequestBase.RequestIdResponseHeaders)
                         {
-                            string requestIdValue = response.Headers.Get(requestIdHeader);
+                            string requestIdValue = response.Headers[requestIdHeader];
                             if (!string.IsNullOrEmpty(requestIdValue))
                             {
                                 requestId = requestIdValue;
