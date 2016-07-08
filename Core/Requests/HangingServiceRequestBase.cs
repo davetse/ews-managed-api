@@ -29,9 +29,11 @@ namespace Microsoft.Exchange.WebServices.Data
     using System.IO;
     using System.IO.Compression;
     using System.Net;
+    using System.Net.Http;
     using System.Text;
     using System.Threading;
     using System.Xml;
+    using Windows.System.Threading;
 
     /// <summary>
     /// Enumeration of reasons that a hanging request may disconnect.
@@ -241,7 +243,7 @@ namespace Microsoft.Exchange.WebServices.Data
                     this.Disconnect(HangingRequestDisconnectReason.Exception, ex);
                     return;
                 }
-                catch (HttpException ex)
+                catch (HttpRequestException ex)
                 {
                     // Stream is closed, so disconnect.
                     this.Disconnect(HangingRequestDisconnectReason.Exception, ex);
@@ -338,8 +340,8 @@ namespace Microsoft.Exchange.WebServices.Data
                     TraceFlags.EwsResponseHttpHeaders,
                     this.response);
 
-                ThreadPool.QueueUserWorkItem(
-                    new WaitCallback(this.ParseResponses));
+                ThreadPool.RunAsync(
+                    new WorkItemHandler(this.ParseResponses));
             }
         }
 
