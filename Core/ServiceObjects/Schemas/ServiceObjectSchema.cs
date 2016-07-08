@@ -123,7 +123,7 @@ namespace Microsoft.Exchange.WebServices.Data
 
             foreach (FieldInfo fieldInfo in fieldInfos)
             {
-                if (fieldInfo.FieldType == typeof(PropertyDefinition) || fieldInfo.FieldType.IsSubclassOf(typeof(PropertyDefinition)))
+                if (fieldInfo.FieldType == typeof(PropertyDefinition) || fieldInfo.FieldType.IsAssignableFrom(typeof(PropertyDefinition)))
                 {
                     PropertyDefinition propertyDefinition = (PropertyDefinition)fieldInfo.GetValue(null);
                     propFieldDelegate(propertyDefinition, fieldInfo);
