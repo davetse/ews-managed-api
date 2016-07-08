@@ -78,8 +78,9 @@ namespace Microsoft.Exchange.WebServices.Data
 
 #if DEBUG
                 // Verify that all Schema types in the Managed API assembly have been included.
-                var missingTypes = from type in Assembly.GetExecutingAssembly().GetTypes() 
-                                   where type.IsSubclassOf(typeof(ServiceObjectSchema)) && !typeList.Contains(type)
+                Type[] assemblyTypes = typeof(ServiceObjectSchema).GetTypeInfo().Assembly.GetTypes();
+                var missingTypes = from type in assemblyTypes 
+                                   where type.IsAssignableFrom(typeof(ServiceObjectSchema)) && !typeList.Contains(type)
                                    select type;
                 if (missingTypes.Count() > 0)
                 {
