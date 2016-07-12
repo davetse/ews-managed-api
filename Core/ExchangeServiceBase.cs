@@ -146,7 +146,7 @@ namespace Microsoft.Exchange.WebServices.Data
             request.AllowAutoRedirect = allowAutoRedirect;
             request.CookieContainer = this.CookieContainer;
             request.KeepAlive = this.keepAlive;
-            request.ConnectionGroupName = this.connectionGroupName;
+            //request.ConnectionGroupName = this.connectionGroupName;
 
             if (acceptGzipEncoding)
             {

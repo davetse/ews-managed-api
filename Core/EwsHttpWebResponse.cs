@@ -28,6 +28,8 @@ namespace Microsoft.Exchange.WebServices.Data
     using System;
     using System.IO;
     using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Represents an implementation of the IEwsHttpWebResponse interface using HttpWebResponse.
@@ -37,13 +39,13 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <summary>
         /// Underlying HttpWebRequest.
         /// </summary>
-        private HttpWebResponse response;
+        private HttpResponseMessage response;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EwsHttpWebResponse"/> class.
         /// </summary>
         /// <param name="response">The response.</param>
-        internal EwsHttpWebResponse(HttpWebResponse response)
+        internal EwsHttpWebResponse(HttpResponseMessage response)
         {
             this.response = response;
         }
@@ -55,7 +57,8 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </summary>
         void IEwsHttpWebResponse.Close()
         {
-            this.response.Close();
+            //No longer necessary
+            //this.response.Close();
         }
 
         /// <summary>
@@ -66,7 +69,8 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </returns>
         Stream IEwsHttpWebResponse.GetResponseStream()
         {
-            return this.response.GetResponseStream();
+            Task<Stream> task = this.response.Content.ReadAsStreamAsync();
+            return task.Result;
         }
 
         /// <summary>
@@ -75,7 +79,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>A string that describes the method that is used to encode the body of the response.</returns>
         string IEwsHttpWebResponse.ContentEncoding
         {
-            get { return this.response.ContentEncoding; }
+            get { return this.response.Content.Headers.ContentEncoding.ToString(); }
         }
 
         /// <summary>
@@ -84,7 +88,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>A string that contains the content type of the response.</returns>
         string IEwsHttpWebResponse.ContentType
         {
-            get { return this.response.ContentType; }
+            get { return this.response.Content.Headers.ContentType.ToString(); }
         }
 
         /// <summary>
@@ -102,7 +106,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>A <see cref="T:System.Uri"/> that contains the URI of the Internet resource that responded to the request.</returns>
         Uri IEwsHttpWebResponse.ResponseUri
         {
-            get { return this.response.ResponseUri; }
+            get { return this.response.RequestMessage.RequestUri; }
         }
 
         /// <summary>
@@ -120,7 +124,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>A string that describes the status of the response.</returns>
         string IEwsHttpWebResponse.StatusDescription
         {
-            get { return this.response.StatusDescription; }
+            get { return this.response.ReasonPhrase; }
         }
 
         /// <summary>
@@ -130,7 +134,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>System.Version that contains the HTTP protocol version of the response.</returns>
         Version IEwsHttpWebResponse.ProtocolVersion
         {
-            get { return this.response.ProtocolVersion; }
+            get { return this.response.Version; }
         }
         #endregion
 
@@ -141,7 +145,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </summary>
         void IDisposable.Dispose()
         {
-            this.response.Close();
+            this.response.Dispose();
         }
 
         #endregion
