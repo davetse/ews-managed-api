@@ -52,6 +52,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>Instance of IEwsHttpWebResponse.</returns>
         IEwsHttpWebResponse IEwsHttpWebRequestFactory.CreateExceptionResponse(WebException exception)
         {
+            /* Deprecate getting webresponse message from webException
             EwsUtilities.ValidateParam(exception, "exception");
 
             if (exception.Response == null)
@@ -60,6 +61,8 @@ namespace Microsoft.Exchange.WebServices.Data
             }
 
             return new EwsHttpWebResponse(exception.Response as HttpWebResponse);
+            */
+            throw exception;
         }
         #endregion
     }
