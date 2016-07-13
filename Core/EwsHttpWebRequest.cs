@@ -265,8 +265,18 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>A <see cref="T:System.Net.WebHeaderCollection"/> that contains the name/value pairs that make up the headers for the HTTP request.</returns>
         WebHeaderCollection IEwsHttpWebRequest.Headers
         {
-            get { return this.request.Headers; }
-            set { this.request.Headers = value; }
+            get
+            {
+                return HttpHeadersToWebHeaderCollection.Convert(this.requestMessage.Headers);
+            }
+            set
+            {
+                this.requestMessage.Headers.Clear();
+                foreach (string key in value.AllKeys)
+                {
+                    this.requestMessage.Headers.Add(key, value[key]);
+                }
+            }
         }
 
         /// <summary>

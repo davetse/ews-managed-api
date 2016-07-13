@@ -29,6 +29,7 @@ namespace Microsoft.Exchange.WebServices.Data
     using System.IO;
     using System.Net;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -97,7 +98,10 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>A <see cref="T:System.Net.WebHeaderCollection"/> that contains the header information returned with the response.</returns>
         WebHeaderCollection IEwsHttpWebResponse.Headers
         {
-            get { return this.response.Headers; }
+            get
+            {
+                return HttpHeadersToWebHeaderCollection.Convert(this.response.Headers);
+            } 
         }
 
         /// <summary>
