@@ -89,32 +89,30 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                 bool needSignature = this.Service.Credentials != null && this.Service.Credentials.NeedSignature;
                 bool needTrace = this.Service.IsTraceEnabledFor(TraceFlags.AutodiscoverRequest);
 
-                using (Stream requestStream = request.GetRequestStream())
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    using (EwsServiceXmlWriter writer = new EwsServiceXmlWriter(this.Service, memoryStream))
                     {
-                        using (EwsServiceXmlWriter writer = new EwsServiceXmlWriter(this.Service, memoryStream))
-                        {
-                            writer.RequireWSSecurityUtilityNamespace = needSignature;
-                            this.WriteSoapRequest(
-                                this.Url, 
-                                writer);
-                        }
-
-                        if (needSignature)
-                        {
-                            this.service.Credentials.Sign(memoryStream);
-                        }
-
-                        if (needTrace)
-                        {
-                            memoryStream.Position = 0;
-                            this.Service.TraceXml(TraceFlags.AutodiscoverRequest, memoryStream);
-                        }
-
-                        EwsUtilities.CopyStream(memoryStream, requestStream);
+                        writer.RequireWSSecurityUtilityNamespace = needSignature;
+                        this.WriteSoapRequest(
+                            this.Url, 
+                            writer);
                     }
+
+                    if (needSignature)
+                    {
+                        this.service.Credentials.Sign(memoryStream);
+                    }
+
+                    if (needTrace)
+                    {
+                        memoryStream.Position = 0;
+                        this.Service.TraceXml(TraceFlags.AutodiscoverRequest, memoryStream);
+                    }
+
+                    request.SetRequestStream(memoryStream);
                 }
+
 
                 using (IEwsHttpWebResponse webResponse = request.GetResponse())
                 {

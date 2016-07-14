@@ -44,10 +44,11 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </summary>
         // private HttpWebRequest request;
         private HttpRequestMessage requestMessage;
-        private Stream contentStream;
+        private string requestContent;
         private HttpClientHandler clientHandler;
         private HttpClient httpClient;
         private int timeOutInMilliseconds;
+        private string contentType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EwsHttpWebRequest"/> class.
@@ -57,13 +58,14 @@ namespace Microsoft.Exchange.WebServices.Data
         {
             //this.request = (HttpWebRequest)WebRequest.Create(uri);
             this.requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
-            this.contentStream = new MemoryStream();
             this.clientHandler = new HttpClientHandler();
             this.httpClient = null;
             this.timeOutInMilliseconds = 100000;
+            this.contentType = "";
+            this.requestContent = "";
         }
 
-        #region IEwsHttpWebRequest Members
+          #region IEwsHttpWebRequest Members
 
         /// <summary>
         /// Aborts this instance.
@@ -76,6 +78,7 @@ namespace Microsoft.Exchange.WebServices.Data
             }
         }
 
+        /*
         /// <summary>
         /// Begins an asynchronous request for a <see cref="T:System.IO.Stream"/> object to use to write data.
         /// </summary>
@@ -89,10 +92,21 @@ namespace Microsoft.Exchange.WebServices.Data
             // return this.request.BeginGetRequestStream(callback, state);
             return null;
         }
+        */
 
         Task<HttpResponseMessage> SendEwsHttpWebRequest()
         {
-            this.requestMessage.Content = new StreamContent(this.contentStream);
+            // Add content to http request if it exists
+            if (this.requestContent.Length > 0 )
+            {
+                this.requestMessage.Content = new StringContent(this.requestContent,System.Text.Encoding.UTF8,"text/xml");
+                /*
+                if (this.contentType.Length > 0)
+                {
+                    this.requestMessage.Content.Headers.TryAddWithoutValidation("Content-Type", this.contentType);
+                }
+                */
+            }
             this.httpClient = new HttpClient(this.clientHandler);
             this.httpClient.Timeout = new TimeSpan(0,0,0,0,this.timeOutInMilliseconds);
             return this.httpClient.SendAsync(this.requestMessage);
@@ -135,6 +149,7 @@ namespace Microsoft.Exchange.WebServices.Data
             // return this.request.BeginGetResponse(callback, state);
         }
 
+        /*
         /// <summary>
         /// Ends an asynchronous request for a <see cref="T:System.IO.Stream"/> object to use to write data.
         /// </summary>
@@ -147,6 +162,7 @@ namespace Microsoft.Exchange.WebServices.Data
             // return this.request.EndGetRequestStream(asyncResult);
             return this.contentStream;
         }
+        */
 
         /// <summary>
         /// Ends an asynchronous request to an Internet resource.
@@ -161,6 +177,7 @@ namespace Microsoft.Exchange.WebServices.Data
             return new EwsHttpWebResponse(response);
         }
 
+        /*
         /// <summary>
         /// Gets a <see cref="T:System.IO.Stream"/> object to use to write request data.
         /// </summary>
@@ -172,6 +189,19 @@ namespace Microsoft.Exchange.WebServices.Data
             // return this.request.GetRequestStream();
             return this.contentStream;
         }
+        */
+
+        void IEwsHttpWebRequest.SetRequestStream(Stream requestContent)
+        {
+            MemoryStream memStream = new MemoryStream();
+            EwsUtilities.CopyStream(requestContent, memStream);
+            memStream.Position = 0;
+            using (StreamReader reader = new StreamReader(memStream))
+            {
+                this.requestContent = reader.ReadToEnd();
+            }
+        }
+
 
         /// <summary>
         /// Returns a response from an Internet resource.
@@ -235,8 +265,8 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>The value of the Content-type HTTP header. The default value is null.</returns>
         string IEwsHttpWebRequest.ContentType
         {
-            get { return this.requestMessage.Content.Headers.ContentType.ToString(); }
-            set { this.requestMessage.Content.Headers.ContentType.MediaType = value; }
+            get { return this.contentType; }
+            set { this.contentType = value; }
         }
 
         /// <summary>
@@ -348,7 +378,7 @@ namespace Microsoft.Exchange.WebServices.Data
             set
             {
                 this.requestMessage.Headers.UserAgent.Clear();
-                this.requestMessage.Headers.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue(value));
+                this.requestMessage.Headers.UserAgent.ParseAdd(value);
             }
         }
 

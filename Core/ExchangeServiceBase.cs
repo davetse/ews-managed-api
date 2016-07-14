@@ -138,7 +138,7 @@ namespace Microsoft.Exchange.WebServices.Data
 
             IEwsHttpWebRequest request = this.HttpWebRequestFactory.CreateRequest(url);
 
-            request.PreAuthenticate = this.PreAuthenticate;
+            // request.PreAuthenticate = this.PreAuthenticate;  Not supported in UWP
             request.Timeout = this.Timeout;
             this.SetContentType(request);
             request.Method = "POST";

@@ -185,7 +185,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
 
             this.TraceHttpRequestHeaders(TraceFlags.AutodiscoverRequestHttpHeaders, request);
 
-            using (Stream requestStream = request.GetRequestStream())
+            using (Stream requestStream = new MemoryStream())
             {
                 Stream writerStream = requestStream;
 
@@ -214,6 +214,8 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                         this.WriteLegacyAutodiscoverRequest(emailAddress, settings, writer);
                     }
                 }
+
+                request.SetRequestStream(requestStream);
             }
 
             using (IEwsHttpWebResponse webResponse = request.GetResponse())
@@ -1344,7 +1346,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
 
                 request.Method = "GET";
                 request.AllowAutoRedirect = false;
-                request.PreAuthenticate = false;
+                // request.PreAuthenticate = false;     Not supported in UWP
                 request.UseDefaultCredentials = false;
 
                 IEwsHttpWebResponse response = null;

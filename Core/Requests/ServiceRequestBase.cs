@@ -393,12 +393,13 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <param name="request">The request.</param>
         private void EmitRequest(IEwsHttpWebRequest request)
         {
-            using (Stream requestStream = this.GetWebRequestStream(request))
+            using (Stream requestStream = new MemoryStream())
             {
                 using (EwsServiceXmlWriter writer = new EwsServiceXmlWriter(this.Service, requestStream))
                 {
                     this.WriteToXml(writer);
                 }
+                request.SetRequestStream(requestStream);
             }
         }
 
@@ -428,13 +429,11 @@ namespace Microsoft.Exchange.WebServices.Data
                     this.TraceXmlRequest(memoryStream);
                 }
 
-                using (Stream serviceRequestStream = this.GetWebRequestStream(request))
-                {
-                    EwsUtilities.CopyStream(memoryStream, serviceRequestStream);
-                }
+                request.SetRequestStream(memoryStream);
             }
         }
 
+        /*
         /// <summary>
         /// Get the request stream
         /// </summary>
@@ -450,6 +449,7 @@ namespace Microsoft.Exchange.WebServices.Data
             // Reference: http://www.wintellect.com/CS/blogs/jeffreyr/archive/2009/02/08/httpwebrequest-its-request-stream-and-sending-data-in-chunks.aspx
             return request.EndGetRequestStream(request.BeginGetRequestStream(null, null));
         }
+        */
 
         /// <summary>
         /// Reads the response.

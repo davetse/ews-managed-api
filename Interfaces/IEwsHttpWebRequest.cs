@@ -40,6 +40,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </summary>
         void Abort();
 
+        /*
         /// <summary>
         /// Begins an asynchronous request for a <see cref="T:System.IO.Stream"/> object to use to write data.
         /// </summary>
@@ -49,6 +50,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// An <see cref="T:System.IAsyncResult"/> that references the asynchronous request.
         /// </returns>
         IAsyncResult BeginGetRequestStream(AsyncCallback callback, object state);
+        */
 
         /// <summary>
         /// Begins an asynchronous request to an Internet resource.
@@ -60,6 +62,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </returns>
         IAsyncResult BeginGetResponse(AsyncCallback callback, object state);
 
+        /*
         /// <summary>
         /// Ends an asynchronous request for a <see cref="T:System.IO.Stream"/> object to use to write data.
         /// </summary>
@@ -68,6 +71,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// A <see cref="T:System.IO.Stream"/> to use to write request data.
         /// </returns>
         Stream EndGetRequestStream(IAsyncResult asyncResult);
+        */
 
         /// <summary>
         /// Ends an asynchronous request to an Internet resource.
@@ -78,6 +82,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// </returns>
         IEwsHttpWebResponse EndGetResponse(IAsyncResult asyncResult);
 
+        /*
         /// <summary>
         /// Gets a <see cref="T:System.IO.Stream"/> object to use to write request data.
         /// </summary>
@@ -85,6 +90,14 @@ namespace Microsoft.Exchange.WebServices.Data
         /// A <see cref="T:System.IO.Stream"/> to use to write request data.
         /// </returns>
         Stream GetRequestStream();
+        */
+
+        /// <summary>
+        /// Sets request content payload to specified stream
+        /// </summary>
+        /// <returns>
+        /// </returns>
+        void SetRequestStream(Stream requestContent);
 
         /// <summary>
         /// Returns a response from an Internet resource.
