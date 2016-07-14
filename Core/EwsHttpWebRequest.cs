@@ -235,7 +235,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>The value of the Content-type HTTP header. The default value is null.</returns>
         string IEwsHttpWebRequest.ContentType
         {
-            get { return this.requestMessage.Content.Headers.ContentType.MediaType; }
+            get { return this.requestMessage.Content.Headers.ContentType.ToString(); }
             set { this.requestMessage.Content.Headers.ContentType.MediaType = value; }
         }
 
@@ -363,13 +363,9 @@ namespace Microsoft.Exchange.WebServices.Data
                 {
                     return true;
                 }
-                else if (this.requestMessage.Headers.Connection.Contains("close"))
-                {
-                    return false;
-                }
                 else
                 {
-                    return false; // Presume header absence means keepalive == false
+                    return false;
                 }
             }
             set
