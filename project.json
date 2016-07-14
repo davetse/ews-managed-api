@@ -1,8 +1,9 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.1",
     "System.Net.Http": "4.1.0",
-    "System.Security.Cryptography.X509Certificates": "4.1.0"
+    "System.Security.Cryptography.X509Certificates": "4.1.0",
+    "System.Xml.XmlDocument": "4.0.1"
   },
   "frameworks": {
     "uap10.0": {}
