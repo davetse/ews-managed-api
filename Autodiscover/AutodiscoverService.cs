@@ -187,8 +187,6 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
 
             using (Stream requestStream = new MemoryStream())
             {
-                Stream writerStream = requestStream;
-
                 // If tracing is enabled, we generate the request in-memory so that we
                 // can pass it along to the ITraceListener. Then we copy the stream to
                 // the request stream.
@@ -209,12 +207,17 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                 }
                 else
                 {
-                    using (StreamWriter writer = new StreamWriter(requestStream))
+                    using (MemoryStream memoryStream = new MemoryStream())
                     {
-                        this.WriteLegacyAutodiscoverRequest(emailAddress, settings, writer);
+                        using (StreamWriter writer = new StreamWriter(memoryStream))
+                        {
+                            this.WriteLegacyAutodiscoverRequest(emailAddress, settings, writer);
+                            writer.Flush();
+
+                            EwsUtilities.CopyStream(memoryStream, requestStream);
+                        }
                     }
                 }
-
                 request.SetRequestStream(requestStream);
             }
 
