@@ -354,7 +354,13 @@ namespace Microsoft.Exchange.WebServices.Data
         /// <returns>Value</returns>
         public string ReadValue()
         {
-            return this.xmlReader.ReadElementContentAsString();
+            string result = "";
+            this.Read();
+            if (this.NodeType == XmlNodeType.Text)
+            {
+                result = this.xmlReader.Value;
+            }
+            return result;
         }
 
         /// <summary>
