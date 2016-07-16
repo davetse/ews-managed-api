@@ -359,6 +359,7 @@ namespace Microsoft.Exchange.WebServices.Data
             if (this.NodeType == XmlNodeType.Text)
             {
                 result = this.xmlReader.Value;
+                this.Read();
             }
             return result;
         }

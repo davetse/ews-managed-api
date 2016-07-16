@@ -62,7 +62,7 @@ namespace Microsoft.Exchange.WebServices.Data
 
             return new EwsHttpWebResponse(exception.Response as HttpWebResponse);
             */
-            throw exception;
+            return null;
         }
         #endregion
     }

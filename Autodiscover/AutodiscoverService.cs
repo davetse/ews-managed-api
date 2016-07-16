@@ -33,6 +33,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
     using System.Text.RegularExpressions;
     using System.Xml;
     using Microsoft.Exchange.WebServices.Data;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines a delegate that is used by the AutodiscoverService to ask whether a redirectionUrl can be used.
@@ -298,7 +299,7 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
 
             request.Method = "GET";
             request.AllowAutoRedirect = false;
-            request.PreAuthenticate = false;
+            //request.PreAuthenticate = false;   not supported for UWP
 
             IEwsHttpWebResponse response = null;
 
@@ -1377,6 +1378,12 @@ namespace Microsoft.Exchange.WebServices.Autodiscover
                     this.TraceMessage(
                         TraceFlags.AutodiscoverConfiguration,
                         string.Format("I/O error: {0}", ex.Message));
+                }
+                catch (Exception ex)
+                {
+                    this.TraceMessage(
+                        TraceFlags.AutodiscoverConfiguration,
+                        string.Format("General exception: {0}", ex.Message));
                 }
 
                 if (response != null)
