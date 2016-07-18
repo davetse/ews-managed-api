@@ -355,10 +355,14 @@ namespace Microsoft.Exchange.WebServices.Data
         public string ReadValue()
         {
             string result = "";
-            this.Read();
+            if (this.NodeType == XmlNodeType.Element)
+            {
+                this.Read();
+            }
             if (this.NodeType == XmlNodeType.Text)
             {
                 result = this.xmlReader.Value;
+                this.Read();
             }
             return result;
         }
