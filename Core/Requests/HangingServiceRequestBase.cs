@@ -191,7 +191,6 @@ namespace Microsoft.Exchange.WebServices.Data
 
                     using (Stream responseStream = this.response.GetResponseStream())
                     {
-                        responseStream.ReadTimeout = 2 * this.heartbeatFrequencyMilliseconds;
                         tracingStream = new HangingTraceStream(responseStream, this.Service);
 
                         // EwsServiceMultiResponseXmlReader.Create causes a read.
@@ -340,7 +339,7 @@ namespace Microsoft.Exchange.WebServices.Data
                     TraceFlags.EwsResponseHttpHeaders,
                     this.response);
 
-                ThreadPool.RunAsync(
+                var t = ThreadPool.RunAsync(
                     new WorkItemHandler(this.ParseResponses));
             }
         }

@@ -109,7 +109,7 @@ namespace Microsoft.Exchange.WebServices.Data
             }
             this.httpClient = new HttpClient(this.clientHandler);
             this.httpClient.Timeout = new TimeSpan(0,0,0,0,this.timeOutInMilliseconds);
-            return this.httpClient.SendAsync(this.requestMessage);
+            return this.httpClient.SendAsync(this.requestMessage, HttpCompletionOption.ResponseHeadersRead);
         }
 
         /// <summary>

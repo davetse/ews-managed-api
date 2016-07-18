@@ -424,10 +424,8 @@ namespace Microsoft.Exchange.WebServices.Data
             StringBuilder sb = new StringBuilder();
             using (StringWriter writer = new StringWriter(sb))
             {
-                using (XmlWriter xmlWriter = XmlWriter.Create(writer))
+                using (XmlWriter xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
                 {
-                    xmlWriter.Settings.Indent = true;
-
                     EwsUtilities.WriteTraceStartElement(xmlWriter, entryKind, false);
 
                     xmlWriter.WriteWhitespace(Environment.NewLine);
@@ -553,12 +551,11 @@ namespace Microsoft.Exchange.WebServices.Data
             {
                 using (XmlReader reader = XmlReader.Create(memoryStream, settings))
                 {
+                    reader.MoveToContent();
                     using (StringWriter writer = new StringWriter(sb))
                     {
-                        using (XmlWriter xmlWriter = XmlWriter.Create(writer))
+                        using (XmlWriter xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
                         {
-                            xmlWriter.Settings.Indent = true;
-
                             EwsUtilities.WriteTraceStartElement(xmlWriter, entryKind, true);
 
                             while (!reader.EOF)
