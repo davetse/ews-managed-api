@@ -195,7 +195,8 @@ namespace Microsoft.Exchange.WebServices.Data
 
         internal virtual void SetContentType(IEwsHttpWebRequest request)
         {
-            request.ContentType = "text/xml; charset=utf-8";
+            request.ContentMediaType = "text/xml";
+            request.ContentCharset = System.Text.Encoding.UTF8;
             request.Accept = "text/xml";
         }
 

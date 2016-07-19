@@ -48,7 +48,8 @@ namespace Microsoft.Exchange.WebServices.Data
         private HttpClientHandler clientHandler;
         private HttpClient httpClient;
         private int timeOutInMilliseconds;
-        private string contentType;
+        private string contentMediaType;
+        private System.Text.Encoding contentCharset;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EwsHttpWebRequest"/> class.
@@ -61,8 +62,9 @@ namespace Microsoft.Exchange.WebServices.Data
             this.clientHandler = new HttpClientHandler();
             this.httpClient = null;
             this.timeOutInMilliseconds = 100000;
-            this.contentType = "";
             this.requestContent = "";
+            this.contentMediaType = "text/xml";                 // default media type
+            this.contentCharset = System.Text.Encoding.UTF8;    // default text encoding
         }
 
           #region IEwsHttpWebRequest Members
@@ -99,13 +101,7 @@ namespace Microsoft.Exchange.WebServices.Data
             // Add content to http request if it exists
             if (this.requestContent.Length > 0 )
             {
-                this.requestMessage.Content = new StringContent(this.requestContent,System.Text.Encoding.UTF8,"text/xml");
-                /*
-                if (this.contentType.Length > 0)
-                {
-                    this.requestMessage.Content.Headers.TryAddWithoutValidation("Content-Type", this.contentType);
-                }
-                */
+                this.requestMessage.Content = new StringContent(this.requestContent,this.contentCharset,this.contentMediaType);
             }
             this.httpClient = new HttpClient(this.clientHandler);
             this.httpClient.Timeout = new TimeSpan(0,0,0,0,this.timeOutInMilliseconds);
@@ -260,13 +256,23 @@ namespace Microsoft.Exchange.WebServices.Data
         }
 
         /// <summary>
-        /// Gets or sets the value of the Content-type HTTP header.
+        /// Gets or sets the value of the Content-type MediaType value of HTTP header.
         /// </summary>
-        /// <returns>The value of the Content-type HTTP header. The default value is null.</returns>
-        string IEwsHttpWebRequest.ContentType
+        /// <returns>The value of the Content-type MediaType value of HTTP header. The default value is null.</returns>
+        string IEwsHttpWebRequest.ContentMediaType
         {
-            get { return this.contentType; }
-            set { this.contentType = value; }
+            get { return this.contentMediaType; }
+            set { this.contentMediaType = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the value of the Content-type Charset value of HTTP header.
+        /// </summary>
+        /// <returns>The value of the Content-type Charset value of HTTP header. The default value is null.</returns>
+        System.Text.Encoding IEwsHttpWebRequest.ContentCharset
+        {
+            get { return this.contentCharset; }
+            set { this.contentCharset = value; }
         }
 
         /// <summary>

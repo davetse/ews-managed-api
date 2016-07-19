@@ -134,12 +134,21 @@ namespace Microsoft.Exchange.WebServices.Data
         }
 
         /// <summary>
-        /// Gets or sets the value of the Content-type HTTP header.
+        /// Gets or sets the value of the Content-type MediaType value of HTTP header.
         /// </summary>
-        /// <returns>The value of the Content-type HTTP header. The default value is null.</returns>
-        string ContentType
-        { 
-            get; set; 
+        /// <returns>The value of the Content-type MediaType value of HTTP header. The default value is "text/xml".</returns>
+        string ContentMediaType
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets the value of the Content-type Charset value of HTTP header.
+        /// </summary>
+        /// <returns>The value of the Content-type Charset value of HTTP header. The default value is UTF8.</returns>
+        System.Text.Encoding ContentCharset
+        {
+            get; set;
         }
 
         /// <summary>
