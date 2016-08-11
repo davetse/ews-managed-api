@@ -33,7 +33,7 @@ namespace Microsoft.Exchange.WebServices.Data
     /// ServiceObjectDefinition attribute decorates classes that map to EWS service objects.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    internal sealed class ServiceObjectDefinitionAttribute : Attribute
+    public sealed class ServiceObjectDefinitionAttribute : Attribute
     {
         private string xmlElementName;
         private bool returnedByServer;
@@ -42,7 +42,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Initializes a new instance of the <see cref="ServiceObjectDefinitionAttribute"/> class.
         /// </summary>
         /// <param name="xmlElementName">Name of the XML element.</param>
-        internal ServiceObjectDefinitionAttribute(string xmlElementName)
+        public ServiceObjectDefinitionAttribute(string xmlElementName)
             : base()
         {
             this.xmlElementName = xmlElementName;
