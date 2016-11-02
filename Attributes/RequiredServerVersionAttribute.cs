@@ -32,7 +32,7 @@ namespace Microsoft.Exchange.WebServices.Data
     /// in which they appeared.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    internal sealed class RequiredServerVersionAttribute : Attribute
+    public sealed class RequiredServerVersionAttribute : Attribute
     {
         /// <summary>
         /// Exchange version.
@@ -43,7 +43,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Initializes a new instance of the <see cref="RequiredServerVersionAttribute"/> class.
         /// </summary>
         /// <param name="version">The Exchange version.</param>
-        internal RequiredServerVersionAttribute(ExchangeVersion version)
+        public RequiredServerVersionAttribute(ExchangeVersion version)
             : base()
         {
             this.version = version;

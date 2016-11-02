@@ -108,7 +108,7 @@ namespace Microsoft.Exchange.WebServices.Dns
         /// <param name="ptrRecords">DNS records pointer</param>
         /// <param name="freeType">Record List Free type</param>
         [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Justification = "Managed API")]
-        [DllImport(DNSAPI, EntryPoint = "DnsRecordListFree", CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode)]
+        [DllImport(DNSAPI, EntryPoint = "DnsRecordListFree", CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode, ExactSpelling = true)]
         private static extern void DnsRecordListFree([In] IntPtr ptrRecords, [In] FreeType freeType);
 
         /// <summary>

@@ -33,7 +33,7 @@ namespace Microsoft.Exchange.WebServices.Data
     /// If this is used to decorate an enumeration, be sure to add that enum type to the dictionary in EwsUtilities.cs
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    internal sealed class EwsEnumAttribute : Attribute
+    public sealed class EwsEnumAttribute : Attribute
     {
         /// <summary>
         /// The name for the enum value used in the server protocol
@@ -44,7 +44,7 @@ namespace Microsoft.Exchange.WebServices.Data
         /// Initializes a new instance of the <see cref="EwsEnumAttribute"/> class.
         /// </summary>
         /// <param name="schemaName">Thename used in the protocol for the enum.</param>
-        internal EwsEnumAttribute(string schemaName)
+        public EwsEnumAttribute(string schemaName)
             : base()
         {
             this.schemaName = schemaName;
